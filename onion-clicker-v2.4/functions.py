@@ -441,7 +441,12 @@ def tierbronze():
     fileread = file.read()
 
     if 'TIER : BRONZE\n' in fileread:
-        message = messagebox.showinfo('Onion Clicker', 'JUŻ POSIADASZ TEN PRZEDMIOT!')
+        photo1 = Image.open('cache/onions/onionbronze.png')
+        image1 = photo1.resize((250, 250))
+        newimg1 = ImageTk.PhotoImage(image1)
+
+        cebula.config(bg = '#ff8400', activebackground = '#ff8400', image = newimg1, borderwidth = 0)
+        cebula.image = newimg1
     else:
         if int(liczba) >= 700:
             file.write('TIER : BRONZE\n')
@@ -474,7 +479,12 @@ def tiersilver():
     fileread = file.read()
 
     if 'TIER : SILVER\n' in fileread:
-        message = messagebox.showinfo('Onion Clicker', 'JUŻ POSIADASZ TEN PRZEDMIOT!')
+        photo1 = Image.open('cache/onions/onionsilver.png')
+        image1 = photo1.resize((250, 250))
+        newimg1 = ImageTk.PhotoImage(image1)
+
+        cebula.config(bg = '#ff8400', activebackground = '#ff8400', image = newimg1, borderwidth = 0)
+        cebula.image = newimg1
     else:
         if int(liczba) >= 5000:
             file.write('TIER : SILVER\n')
@@ -508,7 +518,12 @@ def tiergold():
     fileread = file.read()
 
     if 'TIER : GOLD\n' in fileread:
-        message = messagebox.showinfo('Onion Clicker', 'JUŻ POSIADASZ TEN PRZEDMIOT!')
+        photo1 = Image.open('cache/onions/oniongold.png')
+        image1 = photo1.resize((250, 250))
+        newimg1 = ImageTk.PhotoImage(image1)
+
+        cebula.config(bg = '#ff8400', activebackground = '#ff8400', image = newimg1, borderwidth = 0)
+        cebula.image = newimg1
     else:
         if int(liczba) >= 15000:
             file.write('TIER : GOLD\n')
@@ -542,7 +557,12 @@ def tierdiamond():
     fileread = file.read()
 
     if 'TIER : DIAMOND\n' in fileread:
-        message = messagebox.showinfo('Onion Clicker', 'JUŻ POSIADASZ TEN PRZEDMIOT!')
+        photo1 = Image.open('cache/onions/oniondiamond.png')
+        image1 = photo1.resize((250, 250))
+        newimg1 = ImageTk.PhotoImage(image1)
+
+        cebula.config(bg = '#ff8400', activebackground = '#ff8400', image = newimg1, borderwidth = 0)
+        cebula.image = newimg1
     else:
         if int(liczba) >= 30000:
             file.write('TIER : DIAMOND\n')
@@ -568,7 +588,7 @@ def tierdiamond():
             message = messagebox.showinfo('Onion Clicker', 'NIE STAĆ CIEBIE NA ZAKUP TEGO PRZEDMIOTU!')
 
 def close():
-	if messagebox.askyesno('Onion Clicker v2.4', 'Czy na pewno chcesz wyjść?'):
+	if messagebox.askyesno('Onion Clicker v2.4', 'Czy na pewno chcesz teraz wyjść?'):
 		variablefile = open('num.txt', 'r+')
 		variablefile.truncate()
 		variablefile.write(str(liczba))
@@ -576,7 +596,7 @@ def close():
 
 def closeevent(event):
 	if event:
-		if messagebox.askyesno('Onion Clicker v2.4', 'Czy na pewno chcesz wyjść?'):
+		if messagebox.askyesno('Onion Clicker v2.4', 'Czy na pewno chcesz teraz wyjść?'):
 			variablefile = open('num.txt', 'r+')
 			variablefile.truncate()
 			variablefile.write(str(liczba))
