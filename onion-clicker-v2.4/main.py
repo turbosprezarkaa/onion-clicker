@@ -1,10 +1,17 @@
 import os
+import sys
+import subprocess
 import random
 import time as time
 import webbrowser
 from tkinter import *
 from tkinter import ttk, messagebox
 from PIL import Image, ImageTk
+
+# def install(package):
+#     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+# install('pillow')
 
 global box
 global liczba
@@ -51,7 +58,7 @@ newimg2 = ImageTk.PhotoImage(image2)
 newimg3 = ImageTk.PhotoImage(image3)
 newimg4 = ImageTk.PhotoImage(image4)
 
-button = Button(window, text = 'build v2.4', bg = '#ff8400', font = ('arial', 10, 'bold'), relief = FLAT, bd = 0, activebackground = '#ff8400', command = link)
+button = Button(window, text = 'WERSJA 2.4', bg = '#ff8400', font = ('jetbrains mono bold', 13), relief = FLAT, bd = 0, activebackground = '#ff8400', command = link)
 button.pack(side = BOTTOM, fill=BOTH)
 
 licznik = Label(window, text = f'KASA:{liczba}$', bg = '#ff8400', font = ('Monofonto-Regular', 30, 'italic'))
