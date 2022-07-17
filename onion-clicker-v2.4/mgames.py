@@ -1,29 +1,33 @@
-global hp
-global hpbar
-
-hp = 6000
+hpfile = open('Cache/inf.txt', 'r+')
+hp = int(hpfile.read())
 
 def func1():
     global root
     global hp
+    global hpfile
     global hpbar
     root.grab_set()
     root1 = Toplevel(root)
     root1.geometry('800x800')
-    root1.iconbitmap('cache/onions/icon.ico')
+    root1.iconbitmap('Cache/Images/icon.ico')
     root1.resizable(0,0)
     root1.config(bg = '#ff8400')
     root1.grab_set()
 
     def hpminus():
         global hp
+        global hpfile
         global hpbar
-        global root1
-
         hp -= 1
-        hpbar.config(text = f'{hp} HP')
+        hpbar.pack_forget()
+        hpbar = Label(root1, text = f'{hp} HP', font = ('jetbrains mono bold', 25), width = 15, bg = '#ff0000', bd = 3, relief = SOLID)
+        hpbar.pack()
+        hpfile.truncate()
+        hpfile = open('Cache/inf.txt', 'r+')
+        hpfile.write(str(hp))
+        hpfile.flush()
 
-    photos = Image.open('cache/onions/onion.png')
+    photos = Image.open('Cache/Images/onion.png')
     image = photos.resize((300, 300))
     newimg = ImageTk.PhotoImage(image)
 
@@ -37,7 +41,7 @@ def func1():
     void2 = Label(root1, text = '\n', bg = '#ff8400')
     void2.pack()  
 
-    hpbar = Label(root1, text = f'{hp} HP', font = ('Monofonto-Regular', 30), width = 15, bg = '#ff0000', bd = 3, relief = SOLID)
+    hpbar = Label(root1, text = f'{hp} HP', font = ('jetbrains mono bold', 25), width = 15, bg = '#ff0000', bd = 3, relief = SOLID)
     hpbar.pack()
 
     root1.mainloop()
@@ -58,17 +62,17 @@ def func2():
     root.destroy()
 
     root2 = Tk()
-    root2.title('Onion Clicker v2.4')
-    root2.geometry('800x820')
-    root2.iconbitmap('cache/onions/icon.ico')
+    root2.title('Onion Clicker')
+    root2.geometry('800x750')
+    root2.iconbitmap('Cache/Images/icon.ico')
     root2.resizable(0,0)
     root2.config(bg = '#ff8400')
 
-    photos = Image.open('cache/minigames/drop.png')
-    image = photos.resize((650, 500))
+    photos = Image.open('Cache/Images/drop.png')
+    image = photos.resize((800, 400))
     newimg = ImageTk.PhotoImage(image)
 
-    licznik = Label(root2, text = f'KASA:{liczba}$', bg = '#ff8400', font = ('Monofonto-Regular', 30, 'italic'))
+    licznik = Label(root2, text = f'KASA:{liczba}$', bg = '#ff8400', font = ('jetbrains mono bold', 30))
     licznik.pack(side = TOP)
 
     void1 = Label(root2, text = '\n\n', bg = '#ff8400')
@@ -86,7 +90,7 @@ def func2():
             
         if int(liczba) >= 4000:
             liczba -= 4000
-            variablefile = open('num.txt', 'r+')
+            variablefile = open('Cache/num.txt', 'r+')
             variablefile.truncate()
             variablefile.write(str(liczba))
             variablefile.flush()
@@ -105,7 +109,7 @@ def func2():
                     label.config(text = f'WYLOSOWAŁEŚ:\n{dropchoice}')
                     case.after(3000, lambda:case.destroy())
 
-                    file = open('data.txt', 'r+')
+                    file = open('Cache/data.txt', 'r+')
                     fileread = file.read()
 
                     if dropchoice == 'SKIN - ONION BRONZE':
@@ -151,13 +155,13 @@ def func2():
                             file.write('MONEY : x5\n')
 
             case = Toplevel(root2)
-            case.title('Onion Clicker v2.4')
-            case.iconbitmap('cache/onions/icon.ico')
+            case.title('Onion Clicker')
+            case.iconbitmap('Cache/Images/icon.ico')
             case.geometry('500x200')
             case.resizable(0, 0)
             case.config(bg = '#ff8400')
             case.grab_set()
-            label = Label(case, text = 'LOSOWANIE PRZEDMIOTU...', bg = '#ff8400', font = ('Monofonto-Regular', 30))
+            label = Label(case, text = 'LOSOWANIE PRZEDMIOTU...', bg = '#ff8400', font = ('jetbrains mono bold', 25))
             label.pack(expand = True)
 
             def quit():
@@ -173,14 +177,14 @@ def func2():
     text = 'OTWÓRZ SKRZYNIĘ (4000$)', 
     bg = '#ff8400', 
     activebackground = '#ff8400',
-    font = ('Monofonto-Regular', 30), 
+    font = ('jetbrains mono bold', 25), 
     relief = SOLID, bd = 2, command = opencase)
     button.pack()
 
     void2 = Label(root2, text = '\n\n\n\n\n\n\n', bg = '#ff8400')
     void2.pack()
 
-    hint = Label(root2, text = 'PRZEDMIOTY W SKRZYNI:\n', bg = '#ff8400', font = ('Monofonto-Regular', 20))
+    hint = Label(root2, text = 'PRZEDMIOTY W SKRZYNI:\n', bg = '#ff8400', font = ('jetbrains mono bold', 17))
     hint.pack()
 
     label = Label(root2, bg = '#ff8400', image = newimg)
@@ -208,7 +212,7 @@ def func3():
         if 'sqrt' in get:
             print('1')
         else:
-            messagebox.showinfo('Onion Clicker v2.4', 'ZOSTAŁ WPISANY ZŁY KOD')
+            messagebox.showinfo('Onion Clicker', 'ZOSTAŁ WPISANY ZŁY KOD')
 
     def lv1():
         global text1
@@ -216,21 +220,14 @@ def func3():
         global label2
         global button1
 
-        photos = Image.open('cache/minigames/code2.png')
+        photos = Image.open('Cache/Images/code2.png')
         image = photos.resize((750, 500))
         newimg = ImageTk.PhotoImage(image)
         
         get = text1.get(1.0, END)
 
-        if 'while(i<=10)' in get:
-            label1.pack_forget()
-            label1 = Label(root3, image = newimg)
-            label1.image = newimg
-            label1.pack(side = TOP)
-            label2.config(text = 'Jakiej funkcji trzeba użyć, aby został zapisany\npierwiastek ze zmiennej value')
-            button1.config(command = lv2)
-
-        elif 'while(i<11)' in get:
+        if 'while(i<=10)' or 'while(i<11)' in get:
+            text1.delete(1.0, END)
             label1.pack_forget()
             label1 = Label(root3, image = newimg)
             label1.image = newimg
@@ -239,21 +236,21 @@ def func3():
             button1.config(command = lv2)
 
         else:
-            messagebox.showinfo('Onion Clicker v2.4', 'ZOSTAŁ WPISANY ZŁY KOD')
+            messagebox.showinfo('Onion Clicker', 'ZOSTAŁ WPISANY ZŁY KOD')
 
     root.grab_set()
     root3 = Toplevel(root)
     root3.geometry('800x800')
-    root3.iconbitmap('cache/onions/icon.ico')
+    root3.iconbitmap('Cache/Images/icon.ico')
     root3.resizable(0,0)
     root3.config(bg = '#ff8400')
     root3.grab_set()
 
-    photos = Image.open('cache/minigames/code1.png')
+    photos = Image.open('Cache/Images/code1.png')
     image = photos.resize((750, 500))
     newimg = ImageTk.PhotoImage(image)
 
-    label2 = Label(root3, text = 'Jak należy uzupełnić powyższy kod,\naby zostało wypisane 10 kolejnych liczb?', bg = '#ff8400', font = ('Monofonto-Regular', 25))
+    label2 = Label(root3, text = 'Jak należy uzupełnić powyższy kod,\naby zostało wypisane 10 kolejnych liczb?', bg = '#ff8400', font = ('jetbrains mono bold', 19))
     label2.pack(side = TOP)
 
     label1 = Label(root3, image = newimg, relief = SOLID, bd = 2)
@@ -263,13 +260,13 @@ def func3():
     void1 = Label(root3, bg = '#ff8400', text = '\n')
     void1.pack(side = BOTTOM)
 
-    button1 = Button(root3, bg = '#ff8400', text = 'ZATWIERDŹ', font = ('Monofonto-Regular', 20), activebackground = '#ff8400', width=10, height=1, relief = SOLID, command = lv1)
+    button1 = Button(root3, bg = '#ff8400', text = 'ZATWIERDŹ', font = ('jetbrains mono bold', 20), activebackground = '#ff8400', width=10, height=1, relief = SOLID, command = lv1)
     button1.pack(side = BOTTOM)
 
     void2 = Label(root3, bg = '#ff8400', text = '\n')
     void2.pack(side = BOTTOM)
 
-    text1 = Text(root3, wrap = None, bg = '#bd6200', insertbackground = 'white', fg = 'white', bd = 2, relief = SOLID, height = 1, width = 40, font = ('consolas', 25))
+    text1 = Text(root3, wrap = None, bg = '#bd6200', insertbackground = 'white', fg = 'white', bd = 2, relief = SOLID, height = 1, width = 30, font = ('jetbrains mono bold', 25))
     text1.pack(side = BOTTOM)
 
     root3.mainloop()
@@ -290,45 +287,45 @@ def mgames():
     global variablefile
     
     variablefile.truncate()
-    variablefile = open('num.txt', 'r+')
+    variablefile = open('Cache/num.txt', 'r+')
     variablefile.write(str(liczba))
     variablefile.flush()
 
     window.destroy()
 
     root = Tk()
-    root.geometry('800x765')
-    root.title('Onion Clicker v2.4')
-    root.iconbitmap('cache/onions/icon.ico')
+    root.geometry('700x720')
+    root.title('Onion Clicker')
+    root.iconbitmap('Cache/Images/icon.ico')
     root.resizable(0, 0)
     root.config(bg = '#ff8400')
     root.grab_set()
 
-    label = Label(root, text = 'M I N I G R Y :', bg = '#ff8400', font = ('Monofonto-Regular', 30, 'underline', 'italic'))
+    label = Label(root, text = 'M I N I G R Y :', bg = '#ff8400', font = ('jetbrains mono bold', 30))
     label.pack(side = TOP)
 
     void = Label(root, bg = '#ff8400')
     void.pack()
 
-    button1 = Button(root, text = '#1\n"POKONAJ\nZŁĄ CEBULĘ"', font = ('Monofonto-Regular', 20), height = 4, width = 15, bg = '#ff8400', activebackground = '#ff8400', activeforeground = 'black', relief = SOLID, bd = 2, command = func1)
+    button1 = Button(root, text = '#1\n"POKONAJ\nZŁĄ CEBULĘ"', font = ('jetbrains mono bold', 17), height = 4, width = 15, bg = '#ff8400', activebackground = '#ff8400', activeforeground = 'black', relief = SOLID, bd = 2, command = func1)
     button1.pack()
 
     void = Label(root, bg = '#ff8400')
     void.pack()
 
-    button2 = Button(root, text = '#2\nOTWIERANIE\nSKRZYŃ', font = ('Monofonto-Regular', 20), height = 4, width = 15, bg = '#ff8400', activebackground = '#ff8400', activeforeground = 'black', relief = SOLID, bd = 2, command = func2)
+    button2 = Button(root, text = '#2\nOTWIERANIE\nSKRZYŃ', font = ('jetbrains mono bold', 17), height = 4, width = 15, bg = '#ff8400', activebackground = '#ff8400', activeforeground = 'black', relief = SOLID, bd = 2, command = func2)
     button2.pack()
 
     void = Label(root, bg = '#ff8400')
     void.pack()
 
-    button3 = Button(root, text = '#3\nUZUPEŁNIJ\nKOD', font = ('Monofonto-Regular', 20), height = 4, width = 15, bg = '#ff8400', activebackground = '#ff8400', activeforeground = 'black', relief = SOLID, bd = 2, command = func3)
+    button3 = Button(root, text = '#3\nUZUPEŁNIJ\nKOD', font = ('jetbrains mono bold', 17), height = 4, width = 15, bg = '#ff8400', activebackground = '#ff8400', activeforeground = 'black', relief = SOLID, bd = 2, command = func3)
     button3.pack()
 
     void = Label(root, text = '\n\n\n', bg = '#ff8400')
     void.pack()
 
-    photo4 = Image.open('cache/buttons/wroc.png')
+    photo4 = Image.open('Cache/Images/wroc.png')
     image4 = photo4.resize((120, 120))
     newimg4 = ImageTk.PhotoImage(image4)
 
@@ -346,38 +343,38 @@ def mgameswindow():
     global liczba
 
     root = Tk()
-    root.geometry('800x765')
-    root.title('Onion Clicker v2.4')
-    root.iconbitmap('cache/onions/icon.ico')
+    root.geometry('700x720')
+    root.title('Onion Clicker')
+    root.iconbitmap('Cache/Images/icon.ico')
     root.resizable(0, 0)
     root.config(bg = '#ff8400')
     root.grab_set()
 
-    label = Label(root, text = 'M I N I G R Y :', bg = '#ff8400', font = ('Monofonto-Regular', 30, 'underline', 'italic'))
+    label = Label(root, text = 'M I N I G R Y :', bg = '#ff8400', font = ('jetbrains mono bold', 30))
     label.pack(side = TOP)
 
     void = Label(root, bg = '#ff8400')
     void.pack()
 
-    button1 = Button(root, text = '#1\n"POKONAJ\nZŁĄ CEBULĘ"', font = ('Monofonto-Regular', 20), height = 4, width = 15, bg = '#ff8400', activebackground = '#ff8400', activeforeground = 'black', relief = SOLID, bd = 2, command = func1)
+    button1 = Button(root, text = '#1\n"POKONAJ\nZŁĄ CEBULĘ"', font = ('jetbrains mono bold', 17), height = 4, width = 15, bg = '#ff8400', activebackground = '#ff8400', activeforeground = 'black', relief = SOLID, bd = 2, command = func1)
     button1.pack()
 
     void = Label(root, bg = '#ff8400')
     void.pack()
 
-    button2 = Button(root, text = '#2\nOTWIERANIE\nSKRZYŃ', font = ('Monofonto-Regular', 20), height = 4, width = 15, bg = '#ff8400', activebackground = '#ff8400', activeforeground = 'black', relief = SOLID, bd = 2, command = func2)
+    button2 = Button(root, text = '#2\nOTWIERANIE\nSKRZYŃ', font = ('jetbrains mono bold', 17), height = 4, width = 15, bg = '#ff8400', activebackground = '#ff8400', activeforeground = 'black', relief = SOLID, bd = 2, command = func2)
     button2.pack()
 
     void = Label(root, bg = '#ff8400')
     void.pack()
 
-    button3 = Button(root, text = '#3\nUZUPEŁNIJ\nKOD', font = ('Monofonto-Regular', 20), height = 4, width = 15, bg = '#ff8400', activebackground = '#ff8400', activeforeground = 'black', relief = SOLID, bd = 2, command = func3)
+    button3 = Button(root, text = '#3\nUZUPEŁNIJ\nKOD', font = ('jetbrains mono bold', 17), height = 4, width = 15, bg = '#ff8400', activebackground = '#ff8400', activeforeground = 'black', relief = SOLID, bd = 2, command = func3)
     button3.pack()
 
     void = Label(root, text = '\n\n\n', bg = '#ff8400')
     void.pack()
 
-    photo4 = Image.open('cache/buttons/wroc.png')
+    photo4 = Image.open('Cache/Images/wroc.png')
     image4 = photo4.resize((120, 120))
     newimg4 = ImageTk.PhotoImage(image4)
 
