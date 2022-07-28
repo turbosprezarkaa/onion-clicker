@@ -210,7 +210,7 @@ def mgames():
     root.geometry('700x600')
     root.title('Onion Clicker')
     root.iconbitmap('Cache/Images/icon.ico')
-    # root.resizable(0, 0)
+    root.resizable(0, 0)
     root.config(bg = '#ff8400')
     root.grab_set()
 
@@ -256,7 +256,7 @@ def mgameswindow():
     root.geometry('700x600')
     root.title('Onion Clicker')
     root.iconbitmap('Cache/Images/icon.ico')
-    # root.resizable(0, 0)
+    root.resizable(0, 0)
     root.config(bg = '#ff8400')
     root.grab_set()
 
